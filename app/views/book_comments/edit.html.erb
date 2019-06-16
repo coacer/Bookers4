@@ -1,5 +1,11 @@
 <h2>コメント編集画面</h2>
-<%= form_for [@book, @book_comment] do |f| %>
-  <%= f.text_area :comment %>
-  <%= f.submit '保存' %>
-<% end %>
+<%# <%= form_for [@book, @book_comment] do |f| %>
+  <%#   <%= f.text_area :comment %>
+  <%#   <%= f.submit '保存' %>
+  <%# <% end %>
+<form action="/books/<%= @book.id %>/book_comments/<%= @book_comment.id %>" method="post" class="edit_book_comment">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"><br>
+  <input type="hidden" name="_method" value="patch"><br>
+  <textarea name="book_comment[comment]" cols="90" rows="5"><%= @book_comment.comment %></textarea><br>
+  <input type="submit" name="commit" class="btn btn-primary" value="保存"><br>
+</form>

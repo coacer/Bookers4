@@ -5,10 +5,20 @@
   <% end %>
 <% end %>
 <h2>New book</h2>
-<%= form_for book do |f| %>
-  <%= f.label :title %><br>
-  <%= f.text_field :title, class: "book_title" %><br>
-  <%= f.label :opinion %><br>
-  <%= f.text_area :body, class: "book_body" %><br>
-  <%= f.submit "Create Book", class: "btn btn-primary" %>
-<% end %>
+<%# <%= form_for book do |f| %>
+  <%#     <%= f.label :title %>
+  <%#     <%= f.text_field :title, class: "book_title" %>
+  <%#     <%= f.label :opinion %>
+  <%#     <%= f.text_area :body, class: "book_body" %>
+  <%#     <%= f.submit "Create Book", class: "btn btn-primary" %>
+  <%#   <% end %>
+
+<form action="/books" method="post" class="new_book">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"><br>
+  <label for="book_title">Title</label><br>
+  <input type="text" name="book[title]" id="book_title" value="<%= book.title %>" class="book_title"><br>
+  <label for="book_body">Opinion</label><br>
+  <textarea name="book[body]" id="book_body" class="book_body"><%= book.body %></textarea><br>
+  <input type="submit" name="commit" class="btn btn-primary" value="Create Book"><br>
+</form>
+

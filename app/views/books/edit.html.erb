@@ -8,13 +8,23 @@
         <p class="error"><%= message %></p>
       <% end %>
     <% end %>
-    <%= form_for @book do |f| %>
-      <%= f.label :title %><br>
-      <%= f.text_field :title, class: "book_title" %><br>
-      <%= f.label :body %><br>
-      <%= f.text_area :body, class: "book_body" %><br>
-      <%= f.submit "Update Book", class: "btn btn-primary", style: "display: block;" %>
-    <% end %>
+    <%# <%= form_for @book do |f| %>
+      <%#   <%= f.label :title %><!-- <br> -->
+      <%#   <%= f.text_field :title, class: "book_title" %><!-- <br> -->
+      <%#   <%= f.label :body %><!-- <br> -->
+      <%#   <%= f.text_area :body, class: "book_body" %><!-- <br> -->
+      <%#   <%= f.submit "Update Book", class: "btn btn-primary", style: "display: block;" %>
+      <%# <% end %>
+
+    <form action="/books/<%= @book.id %>" method="post" class="edit_book">
+      <input type="hidden" name="_method" value="patch"><br>
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"><br>
+      <label for="book_title">Title</label><br>
+      <input type="text" name="book[title]" id="book_title" value="<%= @book.title %>" class="book_title"><br>
+      <label for="book_body">Body</label><br>
+      <textarea name="book[body]" id="book_body" class="book_body"><%= @book.body %></textarea><br>
+      <input type="submit" name="commit" class="btn btn-primary" value="Update Book" style="display: block;"><br>
+    </form>
     <%= link_to "Show", book_path(@book), class: "book_#{@book.id}" %>
     |
     <%= link_to "Back", books_path, class: "back" %>
